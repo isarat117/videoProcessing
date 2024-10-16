@@ -1,0 +1,15 @@
+{
+  "opencv4nodejs": {
+    "disableAutoBuild": "1",
+    "OPENCV_INCLUDE_DIR": "/usr/local/opt/opencv/include",
+    "OPENCV_LIB_DIR": "/usr/local/opt/opencv/lib",
+    "OPENCV_BIN_DIR": "/usr/local/opt/opencv/bin"
+  },
+  "scripts": {
+    "install": "build-opencv --incDir /usr/local/opt/opencv/include --libDir /usr/local/opt/opencv/lib --binDir /usr/local/opt/opencv/bin --nobuild rebuild"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.3",
+    "sharp": "^0.33.5"
+  }
+}
