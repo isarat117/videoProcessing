@@ -33,7 +33,7 @@ Bu projeyi çalıştırmadan önce aşağıdakilerin yüklü olduğundan emin ol
 
 2. Proje dizinine gidin:
    ```
-cd videoProcessing
+   cd videoProcessing
    ```
 
 3. Gerekli bağımlılıkları yükleyin:
