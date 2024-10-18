@@ -14,7 +14,6 @@ class VideoProcessor {
     
   }
 
-  // Kare sayısını bulmak
   getFrameCount() {
     return new Promise((resolve, reject) => {
       ffmpeg.ffprobe(this.videoPath, (err, metadata) => {
@@ -65,7 +64,7 @@ class VideoProcessor {
 
       if (framesAlreadyExist) {
         console.log('Video kareleri zaten mevcut. İşlem yapılmadı.');
-        return; // İşlem yapmayı bırak
+        return;
       }
 
       const frameCount = await this.getFrameCount();
@@ -78,7 +77,5 @@ class VideoProcessor {
     }
   }
 }
-
-
 
 module.exports = VideoProcessor;

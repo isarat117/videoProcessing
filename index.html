@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video İşleme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input, textarea {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+        #videoPlayer {
+            width: 100%;
+            max-width: 640px;
+            display: none;
+            margin-top: 20px;
+        }
+        #progressBar {
+            width: 100%;
+            background-color: #ddd;
+            display: none;
+        }
+        #progressBar div {
+            width: 0%;
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video İşleme Formu</h1>
+    <form id="videoForm">
+        <label for="video">Video Dosyası:</label>
+        <input type="file" id="video" name="video" accept="video/*" required>
+
+        <label for="music">Müzik Dosyası:</label>
+        <input type="file" id="music" name="music" accept="audio/*" required>
+
+        <label for="text">Metin:</label>
+        <textarea id="text" name="text" rows="4" required></textarea>
+
+        <button type="submit">İşlemi Başlat</button>
+    </form>
+
+    <div id="progressBar">
+        <div>0%</div>
+    </div>
+
+    <div id="result"></div>
+    <video id="videoPlayer" controls></video>
+
+    <script>
+        document.getElementById('videoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('video', document.getElementById('video').files[0]);
+            formData.append('music', document.getElementById('music').files[0]);
+            formData.append('text', document.getElementById('text').value);
+
+            const resultDiv = document.getElementById('result');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const progressBar = document.getElementById('progressBar');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'İşlem başlatıldı, lütfen bekleyin...';
+            videoPlayer.style.display = 'none';
+            progressBar.style.display = 'block';
+
+            try {
+                const response = await fetch('http://localhost:3000/process-video', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.videoUrl) {
+                        console.log('Alınan video URL:', result.videoUrl);
+                        videoPlayer.src = `http://localhost:3000${result.videoUrl}`;
+                        videoPlayer.style.display = 'block';
+                        resultDiv.textContent = 'Video işlendi ve yüklendi.';
+                    } else {
+                        resultDiv.textContent = 'Video işlendi ancak URL alınamadı.';
+                    }
+                } else {
+                    const errorData = await response.json();
+                    resultDiv.textContent = `Hata: ${errorData.error || 'Bilinmeyen bir hata oluştu'}\nDetaylar: ${errorData.details || 'Detay yok'}`;
+                }
+            } catch (error) {
+                console.error('Fetch hatası:', error);
+                resultDiv.textContent = `Bir hata oluştu: ${error.message}`;
+            } finally {
+                progressBar.style.display = 'none';
+            }
+        });
+
+        function updateProgress(percent) {
+            const progressBarInner = document.querySelector('#progressBar div');
+            progressBarInner.style.width = `${percent}%`;
+            progressBarInner.textContent = `${percent}%`;
+        }
+    </script>
+</body>
+</html>

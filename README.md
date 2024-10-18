@@ -1,52 +1,73 @@
-# Video Processing Case Study
+# Video İşleme Uygulaması
 
-This project was created as a solution for a case study where the task was to overlay an image with text on a green area in a video and add background music.
+Bu proje, kullanıcıların video yükleyip üzerine metin ekleyebileceği ve arka plan müziği ekleyebileceği bir web uygulamasıdır.
 
-## Features
+## Özellikler
 
-- Detects the green area in the video and overlays an image.
-- Adds custom text over the image.
-- Adds background music to the video.
+- Video yükleme
+- Müzik dosyası yükleme
+- Özel metin ekleme
+- Video işleme (metin ekleme ve arka plan müziği ekleme)
+- İşlenmiş videoyu oynatma
 
-## Technologies Used
+## Kullanılan Teknolojiler
 
-- **Node.js**: Backend processing.
-- **FFmpeg**: Video processing (adding image, text, and background music).
-- **Sharp**: Image manipulation and processing.
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Node.js, Express.js
+- **Video İşleme**: FFmpeg
+- **Görüntü İşleme**: Sharp
 
-## Prerequisites
+## Gereksinimler
 
-Before running this project, ensure you have the following installed:
+Bu projeyi çalıştırmadan önce aşağıdakilerin yüklü olduğundan emin olun:
 
 - [Node.js](https://nodejs.org/)
 - [FFmpeg](https://ffmpeg.org/download.html)
-- [Sharp](https://sharp.pixelplumbing.com/install)
 
-## Installation
+## Kurulum
 
- Install the required dependencies:
+1. Projeyi klonlayın:
+   ```
+   git clone https://github.com/isarat117/videoProcessing.git
+   ```
 
-```bash
-# git clone
-$ git clone https://github.com/isarat117/videoProcessing.git
+2. Proje dizinine gidin:
+   ```
+cd videoProcessing
+   ```
 
-# get direction
-$ cd videoProcessing
+3. Gerekli bağımlılıkları yükleyin:
+   ```
+   npm install
+   ```
 
-# install dependecies
-$ npm install
+## Kullanım
 
-```
+1. Sunucuyu başlatın:
+   ```
+   node server.js
+   ```
 
-## Usage 
-To process the video and overlay the image with text, follow these steps:
+2. Projede bulunan index.html dosyasını tarayıcıda açın.
 
-Ensure you have a video file named video.mp4 in the input folder.
-Place the image you want to overlay in the input/images folder.
-Add the background music file in the input/music folder.
+3. Video dosyası, müzik dosyası yükleyin ve metin girin.
 
-```bash
-# run the project
-$ node index
+4. "İşlemi Başlat" butonuna tıklayın ve işlemin tamamlanmasını bekleyin.
 
-```
+5. İşlem tamamlandığında, işlenmiş video tarayıcıda otomatik olarak görüntülenecektir.
+
+## Proje Yapısı
+
+- `server.js`: Ana sunucu dosyası
+- `exractFrames.js`: Video karelerini çıkaran modül
+- `imageProccesor.js`: Görüntü işleme modülü
+- `index.html`: Web arayüzü
+- `public/`: Statik dosyalar ve işlenmiş videolar için klasör
+
+## Katkıda Bulunma
+
+1. Bu repo'yu fork edin
+2. Yeni bir branch oluşturun (`git checkout -b new-feature`)
+3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik: XYZ'`)
+4. Dalınıza push yapın (`git push origin new-feature`)
+5. Bir Pull Request oluşturun
