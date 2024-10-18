@@ -48,13 +48,13 @@ Bu projeyi çalıştırmadan önce aşağıdakilerin yüklü olduğundan emin ol
    node server.js
    ```
 
-2. Projede bulunan index.html dosyasını tarayıcıda açın.
+2. Tarayıcınızda `http://localhost:3000` adresine gidin.
 
-3. Video dosyası, müzik dosyası yükleyin ve metin girin.
+3. Açılan web sayfasında, video dosyası ve müzik dosyası yükleyin, ardından metin girin.
 
 4. "İşlemi Başlat" butonuna tıklayın ve işlemin tamamlanmasını bekleyin.
 
-5. İşlem tamamlandığında, işlenmiş video tarayıcıda otomatik olarak görüntülenecektir.
+5. İşlem tamamlandığında, işlenmiş video otomatik olarak sayfada görüntülenecektir.
 
 ## Proje Yapısı
 
